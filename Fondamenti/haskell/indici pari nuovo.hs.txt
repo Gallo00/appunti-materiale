@@ -1,0 +1,3 @@
+pari[] = []
+pari[a] = []
+pari(b:a:ys) = a:(pari ys)

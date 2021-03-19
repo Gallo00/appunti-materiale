@@ -1,0 +1,4 @@
+lungh:: String -> Int
+
+lungh[]=0
+lungh(x:xs)=1+(lungh(xs))

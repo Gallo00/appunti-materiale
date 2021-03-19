@@ -1,0 +1,6 @@
+indicepari:: [int] -> [int]
+
+indicepari[]=[]
+indicepari(a)=[]
+indicepari(a:b)=[b]
+indicepari(a:b:xs)=(b) :(indicepari(xs))

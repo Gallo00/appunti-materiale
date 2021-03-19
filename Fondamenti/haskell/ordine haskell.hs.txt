@@ -1,0 +1,2 @@
+ordine([],[])=[]
+ordine(x:xs , y:ys)=if x > y then x:ordine(xs,ys) else y:ordine(xs,ys)

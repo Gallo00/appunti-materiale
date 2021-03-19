@@ -1,0 +1,10 @@
+filtrapari:: [Int] -> [Int]
+
+filtrapari [] = []
+filtrapari (x:xs)= if even x then x:filtrapari(xs) else (filtrapari(xs))
+
+filtradispari:: [Int] -> [Int]
+
+
+filtradispari [] = []
+filtradispari (x:xs)= if even x then filtradispari(xs) else x:filtradispari(xs)

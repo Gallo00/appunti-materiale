@@ -1,0 +1,7 @@
+roundsomma:: [Double] -> Int
+
+somma[]=0
+somma(x:xs)=(x) + somma(xs)
+
+roundsomma l=round(somma (l))
+
