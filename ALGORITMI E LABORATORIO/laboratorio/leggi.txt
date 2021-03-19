@@ -1,0 +1,1 @@
+Di laboratorio è stato presentato un progetto che consisteva nella realizzazione di un report sull'Heap di Fibonacci e sulla sua implementazione software, tutto disponibile nella repository Fibonacci-Heap
