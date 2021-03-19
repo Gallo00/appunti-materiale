@@ -1,0 +1,54 @@
+array		dcd		4,6,5,1,7,10,11,-1,-4,-5,1
+size			dcd		11
+			
+			mov		R0,#array  ;puntatore
+			
+			mov		R1,#size
+			ldr		R2,[R1]    ;dimensione dell'array
+			
+			mov		R5,#0x200  ;puntatore nuova seq
+			mov		R6,#0      ;size nuova seq
+			
+			
+loop
+			cmp		R2,#0
+			beq		end_program
+			
+			ldr		R3,[R0]
+			cmp		R3,#0
+			beq		num_pari
+			bgt		decremento_2
+			blt		incremento_2
+			
+			
+num_pari
+			ldr		R3,[R0]
+			str		R3,[R5]
+			add		R0,R0,#4
+			add		R6,R6,#1
+			add		R5,R5,#4
+			sub		R2,R2,#1
+			b		loop
+			
+decremento_2
+			sub		R3,R3,#2
+			cmp		R3,#0
+			bgt		decremento_2
+			cmp		R3,#-1
+			beq		num_disp
+			b		num_pari
+incremento_2
+			add		R3,R3,#2
+			cmp		R3,#0
+			blt		incremento_2
+			cmp		R3,#1
+			beq		num_disp
+			b		num_pari
+			
+num_disp
+			add		R0,R0,#4
+			sub		R2,R2,#1
+			b		loop
+			
+end_program
+			end

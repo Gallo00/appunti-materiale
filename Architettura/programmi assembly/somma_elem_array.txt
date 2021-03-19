@@ -1,0 +1,23 @@
+dim			dcd		10
+elem			dcd		2,5,3,4,1,7,9,10,3,8
+			
+			
+			mov		r0,#dim
+			ldr		r1,[r0]   ;in r1 sta il valore dim
+			mov		r2,#elem  ;puntatore
+			
+			mov		r3,#0     ;variabile somma(settata a 0)
+loop
+			cmp		r1,#0
+			beq		fine_ciclo
+			
+			ldr		r4,[r2]
+			add		r3,r3,r4
+			add		r2,r2,#4
+			sub		r1,r1,#1
+			
+			b		loop
+			
+fine_ciclo
+			end		; in r3 dovrebbe esserci 52
+			

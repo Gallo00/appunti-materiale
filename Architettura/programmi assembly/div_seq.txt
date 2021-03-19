@@ -1,0 +1,45 @@
+numQ				dcd		500
+numM				dcd		2
+				
+				
+				mov		R0,#numQ
+				ldr		R0,[R0]
+				
+				mov		R1,#numM
+				ldr		R1,[R1]
+				
+				mov		R2,#0  ;a
+				mov		R3,R0  ;aq
+				mov		R4,#0  ;indice i
+				
+				
+loop
+				cmp		R4,#8
+				beq		fine_programma
+				
+				LSL		R3,R3,#1
+				lsr		R2,R3,#8
+				and		R0,R3,#0xff   ;0xff=11111111
+				
+				sub		R2,R2,R1
+				cmp		R2,#0
+				blt		ripristino
+				
+				orr		R0,R0,#1  ;impostare il bit a destra a 1
+				b		salta_ripristino
+				
+ripristino
+				add		R2,R2,R1 ;ripristino di a
+				and		R0,R0,#0xfe  ;0xfe=11111110
+				
+salta_ripristino
+				
+				LSL		R3,R2,#8  ;salviamo gli 8 meno significati di a in aq
+				orr		R3,R3,R0  ;or logico tra q e aq con salvataggio in aq
+				add		R4,R4,#1  ; incremento ciclo
+				b		loop
+				
+fine_programma
+				end
+				
+				

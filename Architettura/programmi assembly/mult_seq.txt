@@ -1,0 +1,36 @@
+numQ			dcd		20
+numM			dcd		30
+			
+			
+			mov		R0,#numQ
+			ldr		R0,[R0]
+			
+			mov		R1,#numM
+			ldr		R1,[R1]
+			
+			mov		R2,#0  ;indice i
+			mov		R3,#0  ; prodotto p
+			
+loop
+			cmp		R2,#8
+			beq		fine_programma
+			
+			;controlliamo	l'ultima cifra a destra di numM
+			and		R4,R1,#1
+			cmp		R4,#0
+			beq		no_add
+			
+			LSL		R5,R0,#8
+			add		R3,R3,R5
+			
+no_add
+			
+			lsr		R3,R3,#1
+			lsr		R1,R1,#1
+			add		R2,R2,#1
+			
+			b		loop
+			
+			
+fine_programma
+			end

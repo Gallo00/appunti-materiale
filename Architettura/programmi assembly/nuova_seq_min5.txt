@@ -1,0 +1,34 @@
+num			dcd		4,2,7,1,8,5,10
+dim			dcd		7
+			
+			
+			mov		R0,#num   ;puntatore
+			
+			mov		R2,#dim
+			ldr		R3,[R2]   ;size
+			
+			mov		R4,#0x200 ;puntatore alla nuova sequenza
+			mov		R5,#0     ;lo usiamo per capire a fine programma la dimensione del nuovo array
+			;costruire	nuova seq in cui ci stanno gli elementi di num minori di 5
+			
+loop
+			cmp		R3,#0
+			beq		end_program
+			
+			ldr		R6,[R0]  ;mettiamo in R6 il valore puntato da R4
+			cmp		R6,#5    ;se è minore di 5,metto nella cella puntata da R4 R6,incremento R5,decremento R3
+			blt		aggiorna_dati
+			
+			add		R0,R0,#4
+			sub		R3,R3,#1
+			b		loop
+aggiorna_dati
+			str		R6,[R4] ;store del valore in R6 nella cella puntata da R4
+			add		R4,R4,#4
+			add		R5,R5,#1
+			add		R0,R0,#4
+			sub		R3,R3,#1
+			b		loop
+			
+end_program
+			end

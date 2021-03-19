@@ -1,0 +1,26 @@
+num_elem			dcd		10
+dati				dcd		3,5,1,11,4,6,9,8,7,2
+				
+				mov		r0,#num_elem
+	      ;		ldr		r1,[r0]       ;r1 numero di elementi
+				mov		r2,#dati      ;r2 puntatore
+				
+cambio_max
+				ldr		r3,[r2]
+loop
+				cmp		r0,#0
+				beq		fine_scorrimento
+				
+				ldr		r4,[r2]
+				cmp		r3,r4
+				blo		cambio_max
+				
+				add		r2,r2,#4
+				sub		r0,r0,#1
+				
+				b		loop
+				
+fine_scorrimento
+				end
+				
+				

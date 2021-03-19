@@ -1,0 +1,24 @@
+op_a			dcd		10   ; cella in posizione i
+op_b			dcd		7    ; cella in posizione i+4(4bytes)
+			
+			
+			
+			mov		r0,#op_a
+			ldr		r1,[r0]     ;in r1 c'è il contenuto di op_a
+			add		r0,r0,#4
+			ldr		r2,[r0]     ;in r2 c'è il contenuto di op_b
+			
+			mov		r3,#0       ;in r3 c'è il valore 0,useremo r3 come variabile somma
+			
+			;sommiamo	10 a 10, 7 volte
+loop
+			cmp		r2,#0  ; se op_b diventa 0 è finito il ciclo
+			beq		fine_ciclo
+			
+			add		r3,r3,r1
+			sub		r2,r2,#1
+			
+			b		loop
+			
+fine_ciclo
+			end		; in r3 dovrebbe esserci 70

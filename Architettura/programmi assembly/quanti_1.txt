@@ -1,0 +1,26 @@
+num1			dcd		12
+			mov		R0,#num1
+			ldr		R0,[R0]
+			mov		R1,#1
+			
+			mov		R2,#0  ;contatore
+			mov		R3,#0  ;contatore iterazioni
+			
+loop
+			cmp		R3,#32
+			beq		fine
+			
+			AND		R5,R0,R1
+			cmp		R5,#0
+			bne		incremento
+ritorno_loop
+			
+			ADD		R3,R3,#1
+			LSL		R1,R1,#1
+			b		loop
+incremento
+			ADD		R2,R2,#1
+			b		ritorno_loop
+			
+fine
+			end
