@@ -1,0 +1,127 @@
+
+CREATE TABLE Sala(
+	IDsala int primary key,
+	lung_schermo int,
+	posti int
+);
+
+CREATE TABLE Film(  
+	IDfilm int AUTO_INCREMENT primary key,
+	DataIn date,
+	DataOut date,
+	Titolo varchar(30)
+);
+
+CREATE TABLE Proiezione(
+	IDfilm int,
+	IDsala int,
+	Data_proiezione date,
+	Ora time,
+	incasso float default 0,
+	primary key(IDfilm,IDsala,Data_proiezione,Ora),
+	FOREIGN KEY(IDfilm) REFERENCES Film(IDfilm),
+	FOREIGN KEY(IDsala) REFERENCES Sala(IDsala)
+);
+
+CREATE TABLE Biglietto(
+	prezzo float,
+	numero int,
+	IDsala int,
+	IDfilm int,
+	Data_proiezione date,
+	Ora time,
+	IDbiglietteria int,
+	primary key(numero,IDfilm,IDsala,Data_proiezione,Ora),
+	FOREIGN KEY(IDfilm) REFERENCES Film(IDfilm),
+	FOREIGN KEY(IDsala) REFERENCES Sala(IDsala),
+	FOREIGN KEY(IDbiglietteria) REFERENCES Biglietteria(IDbiglietteria)
+	
+);
+
+CREATE TABLE Biglietteria(  
+	IDbiglietteria int primary key
+);
+
+CREATE TABLE Dipendenti(  
+	IDdipendente int primary key,
+	Nome varchar(20),
+	Cognome varchar(20),
+	stipendio float,
+	giorno_libero varchar(10),
+	descrizione varchar(60),
+	assegnato_a_bar int,
+	assegnato_a_sala int,
+	assegnato_a_biglietteria int,
+	
+	FOREIGN KEY(assegnato_a_biglietteria) REFERENCES Biglietteria(IDbiglietteria),
+	FOREIGN KEY(assegnato_a_bar) REFERENCES Bar(IDbar),
+	FOREIGN KEY(assegnato_a_sala) REFERENCES Sala(IDsala)
+);
+
+CREATE TABLE Ordine(  
+	IDordine int AUTO_INCREMENT primary key,
+	descrizione varchar(60),
+	IDdipendente int,
+	
+	FOREIGN KEY(IDdipendente) REFERENCES Dipendenti(IDdipendente)
+);
+
+CREATE TABLE Bar(  
+	IDbar int primary key
+);
+
+CREATE TABLE VenditaProdotti(  
+	IDvendita int AUTO_INCREMENT primary key,
+	IDbar int,
+	IDProdottoVenduto int,
+	quantita_venduta int,
+	Giorno date,
+	
+	FOREIGN KEY(IDProdottoVenduto) REFERENCES Prodotti(IDprodotto),
+	FOREIGN KEY(IDbar) REFERENCES Bar(IDbar)
+);
+
+CREATE TABLE Prodotti(  
+	IDProdotto int primary key,
+	quantita int,
+	prezzo float,
+	calorie float
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

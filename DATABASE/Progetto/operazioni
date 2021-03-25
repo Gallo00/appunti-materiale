@@ -1,0 +1,155 @@
+
+--O1:VENDERE BIGLIETTO
+--Passo 1: inserire nuova tupla biglietto
+--(Supponendo le variabili passate a values abbiano dei valori)
+INSERT INTO Biglietto(prezzo,numero,IDsala,IDfilm,Data_proiezione,Ora,IDbiglietteria) 
+VALUES(prezzo,numero,IDsala,IDfilm,Data_proiezione,Ora,IDbiglietteria);
+
+
+--Passo 2: aggiornare Incasso della proiezione corrispondente
+
+CREATE TRIGGER Aggiorna_incasso
+AFTER INSERT ON Biglietto
+FOR EACH ROW 
+BEGIN
+    If(EXISTS(SELECT * 
+			  FROM Proiezione
+			  WHERE IDsala=new.IDsala AND IDfilm=new.IDfilm AND
+			  Data_proiezione=new.Data_proiezione AND Ora=new.Ora
+			  	))
+	THEN UPDATE Proiezione set incasso=incasso + new.prezzo
+	WHERE (IDsala=new.IDsala AND IDfilm=new.IDfilm AND 
+	       Data_proiezione=new.Data_proiezione AND Ora=new.Ora);
+	ELSE delete from Biglietto 
+	WHERE (numero=new.numero AND IDsala=new.IDsala AND IDfilm=new.IDfilm AND
+        	Data_proiezione=new.Data_proiezione AND Ora=new.Ora);
+    END IF;
+END
+	
+
+--O2: Aggiungere proiezione
+INSERT INTO Proiezione(IDfilm,IDsala,Data_proiezione,Ora) 
+VALUES(IDfilm,IDsala,Data_proiezione,Ora);
+--Non possiamo proiettare un film se non è disponibile
+CREATE TRIGGER fix_proiezione
+AFTER INSERT ON Proiezione
+FOR EACH ROW
+BEGIN
+	declare data1 date;
+    declare data2 date;
+    IF(NOT EXISTS(SELECT* 
+	              FROM Film 
+				  WHERE IDfilm=new.IDfilm)) 
+	THEN delete from Proiezione 
+	where (IDfilm=new.IDfilm AND IDsala=new.IDsala AND Data_proiezione=new.Data_proiezione AND Ora=new.Ora);
+    END IF;
+    
+
+	SELECT DataIn INTO data1
+	From Film
+	Where IDfilm=new.IDfilm;
+	
+
+	SELECT DataOut INTO data2
+	From Film
+	Where IDfilm=new.IDfilm;
+	
+	IF ((data1 > new.Data_proiezione) OR( data2 < new.Data_proiezione))
+	THEN delete from Proiezione 
+	WHERE IDfilm=new.IDfilm AND IDsala=new.IDsala AND Data_proiezione=new.Data_proiezione AND Ora=new.Ora;
+	END IF;
+END
+	
+
+
+--O3: aggiungi film
+
+INSERT INTO Film(IDfilm,DataIn,DataOut,Titolo) 
+VALUES(IDfilm,DataIn,DataOut,Titolo);
+
+--Non possiamo aggiungere film in cui DataIn è dopo DataOut
+
+CREATE TRIGGER fix_film
+AFTER INSERT ON Film
+FOR EACH ROW
+BEGIN
+    IF(new.DataIn > new.DataOut) 
+	THEN delete from Film where IDfilm=new.IDfilm;
+END
+
+--O4 aggiungere ordine,quando quantita arriva a 0
+
+CREATE TRIGGER aggiungi_ordine
+AFTER UPDATE ON Prodotti
+FOR EACH ROW
+BEGIN
+	declare x integer;
+	declare y varchar(30);
+	
+    SELECT IDdipendente INTO x
+	FROM Dipendenti
+    ORDER BY RAND()
+    LIMIT 1;
+	
+	SELECT CAST(new.IDprodotto AS nchar) INTO y;
+	
+    IF new.quantita=0
+	THEN insert into Ordine(descrizione,IDdipendente) values(y,x) ;
+    END IF;
+END
+
+
+
+--O5 aggiungi vendita prodotto
+
+INSERT INTO VenditaProdotti(IDbar,IDProdottoVenduto,quantita_venduta,Giorno) 
+values(IDbar,IDProdottoVenduto,quantita_venduta,Giorno) ;
+
+CREATE TRIGGER fix_vendita
+AFTER INSERT ON VenditaProdotti
+FOR EACH ROW
+BEGIN
+	declare x integer;
+	SELECT quantita INTO x
+	FROM Prodotti
+	WHERE IDprodotto=new.IDProdottoVenduto;
+	
+	IF x<new.quantita_venduta
+	THEN delete from VenditaProdotti WHERE IDvendita=new.IDvendita;
+	ELSE update Prodotti set quantita=quantita - new.quantita_venduta WHERE IDprodotto=new.IDprodottoVenduto;
+    END IF;
+END
+
+--O6 visualizza incasso proiezione
+--Questa operazione è stata implementata con una
+-- stored procedure, supponendo siano inserite le variabili
+-- necessarie per la query
+
+SELECT incasso
+FROM Proiezione
+WHERE IDsala=IDsala AND IDfilm=IDfilm AND Data_proiezione=Data_proiezione AND Ora=Ora ;
+
+--O7 modifica quantita prodotti
+-- x e IDprodotto variabili inserite
+Update Prodotti set quantita=quantita + x where IDprodotto=IDprodotto ;
+
+--O8 leggere incassi prodotti di un giorno
+--Questa operazione è stata implementata con una
+-- stored procedure, supponendo siano inserite le variabili
+-- necessarie per la query
+SELECT sum(prezzo)
+FROM VenditaProdotti , Prodotti
+WHERE Giorno=giorno AND IDprodotto=IDprodottoVenduto;
+
+
+
+
+
+
+
+
+
+
+
+
+
