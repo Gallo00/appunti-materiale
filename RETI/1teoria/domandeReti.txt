@@ -1,0 +1,48 @@
+
+Domande a risposta aperta poste allo scritto(non sono tutte)
+
+( riguardano Livello di trasporto fino a DLL mentre in genere
+fisico e applicativo li chiede all'orale)
+
+(NB anche se sembra che la domanda possa avere una  risposta molto secca
+tipo cosa è il flow label cercare di argomentare molto anche essendo troppo 
+espressivi e facendo molto bla bla)
+
+
+OSPF
+FAIRNESS(dim + disegno)
+LINK STATE ROUTING
+DISTANCE VECTORS
+HUB VS SWITCH
+FLOW LABEL
+DISTANZA DI HAMMING 
+MASCHERA DI SOTTORETE
+ALOHA(tutti e due)
+FLOODING
+CONTROLLO DI PARITA' VS CRC
+CSMA e CSMA CD
+DHCP
+BRIDGE
+TRELLIS e VITERBI
+UDP
+THREE WAY HANDSHAKE
+GO BACK N
+RIPETIZIONE SELETTIVA
+MAC ADDRESS
+ARP (RARP)
+CONTROLLO DI FLUSSO E CONGESTIONE DI TCP TAHOE
+CALCOLO DEL TIMER IN TCP
+TECNICHE PER RISOLVERE FRAMING IN DLL
+
+
+
+
+
+
+
+
+
+
+
+
+

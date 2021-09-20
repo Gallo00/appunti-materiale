@@ -1,0 +1,15 @@
+Differenze tra Repeater, Hub, Bridge, Switch
+Repeater : Un amplificatore che serviva per connettere nelle reti con cavo coassiale 
+ripetere il segnale da una tratta all’altra. (Ad esempio in 10Base-5 permetteva di 
+collegare 5 tratte con 4 ripetitori intermedi). Ripete solo il segnale da una parte verso 
+l’altra, con errori e collisioni. Dovrebbe avere solo due porte. 
+Hub: Ha lo stesso funzionamento del repeater, è sempre un dispositivo a livello fisico. 
+La differenza è che Hub ha una struttura tipicamente a stella. Ha più di due porte. 
+Entrambi non sono più utilizzati, non hanno più mercato. 
+Bridge: Trasforma le frame da un formato di LAN a un altro formato di LAN. Però 
+considerato che ormai Ethernet ha preso piede, di fatto quello che si ha è lo Switch. 
+Switch: Equivalente del bridge per Ethernet, multiporta, si trovano switch con 5-8 porte, 
+o 12-48. È un dispositivo intelligente con CPU a livello DLL come il bridge, ha delle 
+memorie in ingresso e in uscita dove accodare pacchetti durante la ricezione o la 
+trasmissione, in attesa che la linea sia libera. 
+Router: Sono a livello superiore (di Rete), interpretano il significato di pacchetti IP.

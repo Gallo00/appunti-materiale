@@ -1,0 +1,9 @@
+aaa:3
+bbb:6
+ccc:7
+ooo:9
+dodo:23
+cinquanta:7
+pippo:43
+pluto:3333331
+paperino:988002

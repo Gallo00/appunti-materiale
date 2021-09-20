@@ -1,0 +1,8 @@
+802.3 x in generale è ethernet
+
+802.3 - ethernet base  10base5, 10base2 (sono i due coassiali) ma anche il baseT e il baseF
+
+802.3 u  -fast ethernet dove usiamo 100baseT4 , 100baseTX e il 100baseFX
+
+802.3 z gigabit-ethernet fibra
+802.3 ab gigabit-ethernet su rame 
