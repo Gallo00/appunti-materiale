@@ -1,0 +1,2 @@
+progetto per il corso di introduzione al data mining.
+https://github.com/Gallo00/progettoDM
