@@ -1,0 +1,16 @@
+M=m*n
+USV'
+
+U : vettori singolari sinistri di M
+(autovettori di M M')  m*r
+
+S : valori singolari ovvero radici quadrate autovalori di M M' e M' M   r*r
+
+V : vettori singolari destri di M
+(autovettori di M' M) n*r  (la trasp è r*n)
+
+Calcolo?
+dato X vettore dei n ratings
+X*V ==> mappiamo ratings nello spazio delle categorie, X*V = Y
+Y poi si moltiplica per V' (rimappiamo i valori nello spazio degli items)
+otteniamo R che è il vettore desiderato
